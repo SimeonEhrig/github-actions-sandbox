@@ -1,9 +1,8 @@
 name: windowsJob
 on: [push, pull_request]
 jobs:
-    macos-echo:
+    uninstall-cmake:
         runs-on: windows-2022
         steps:
             - run: cmake --version
-            - run: choco install cmake.install --allow-downgrade --no-progress --version 3.25
-            - run: cmake --version
+            - run: uninstall cmake.install
