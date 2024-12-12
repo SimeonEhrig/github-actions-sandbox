@@ -5,5 +5,5 @@ jobs:
         runs-on: windows-2022
         steps:
             - run: cmake --version
-            - run: choco install cmake.install --no-progress --version 3.25
+            - run: choco install cmake.install --allow-downgrade --no-progress --version 3.25
             - run: cmake --version
