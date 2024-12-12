@@ -1,0 +1,9 @@
+name: windowsJob
+on: [push, pull_request]
+jobs:
+    macos-echo:
+        runs-on: windows-2022
+        steps:
+            - run: cmake --version
+            - run: choco install cmake.install --no-progress --version 3.25
+            - run: cmake --version
