@@ -5,4 +5,5 @@ jobs:
         runs-on: windows-2022
         steps:
             - run: cmake --version
+            - run: wmic product where "name like 'CMake%'" call uninstall /nointeractive
             - run: choco uninstall cmake.install
