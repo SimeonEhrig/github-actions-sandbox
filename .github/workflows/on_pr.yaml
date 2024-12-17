@@ -1,7 +1,0 @@
-name: run-on-push
-on: [push]
-jobs:
-    run-push-echo:
-        runs-on: ubuntu-latest
-        steps:
-            - run: echo "I'm a push job."
