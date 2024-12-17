@@ -7,3 +7,5 @@ jobs:
             - run: cmake --version
             - run: wmic product where "name like 'CMake%'" call uninstall /nointeractive
             - run: choco uninstall cmake.install
+            - run: choco install cmake.install --no-progress --version 3.25
+            - run: cmake --version
