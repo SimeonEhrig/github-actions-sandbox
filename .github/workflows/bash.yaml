@@ -3,17 +3,9 @@ on: [push, pull_request]
 
 
 jobs:
-    ubuntu:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                shell: bash
-        steps:
-            - uses: actions/checkout@v6
-            - name: display bash version
-              run: ${GITHUB_WORKSPACE}/bash_version.sh
-    macos:
-        runs-on: macos-latest
+    ci:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
         defaults:
             run:
                 shell: bash
@@ -24,12 +16,12 @@ jobs:
             - uses: actions/checkout@v6
             - name: display bash version
               run: ${GITHUB_WORKSPACE}/bash_version.sh
-    windows:
-        runs-on: windows-latest
-        defaults:
-            run:
-                shell: bash
-        steps:
-            - uses: actions/checkout@v6
-            - name: display bash version
-              run: ${GITHUB_WORKSPACE}/bash_version.sh
+        strategy:
+            matrix:
+                include:
+                    - name: linux
+                      os: ubuntu-latest
+                    - name: macos
+                      os: macos-latest
+                    - name: windows
+                      os: windows-latest
