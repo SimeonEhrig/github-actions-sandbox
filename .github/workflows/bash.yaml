@@ -1,0 +1,32 @@
+name: bash5
+on: [push, pull_request]
+
+
+jobs:
+    ubuntu:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - uses: actions/checkout@v4
+            - name: display bash version
+              run: ${GITHUB_WORKSPACE}/bash_version.sh
+    macos:
+        runs-on: macos-latest
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - uses: actions/checkout@v4
+            - name: display bash version
+              run: ${GITHUB_WORKSPACE}/bash_version.sh
+    windows:
+        runs-on: windows-latest
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - uses: actions/checkout@v4
+            - name: display bash version
+              run: ${GITHUB_WORKSPACE}/bash_version.sh
