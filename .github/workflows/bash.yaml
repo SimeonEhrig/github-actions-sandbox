@@ -1,0 +1,27 @@
+name: bash5
+on: [push, pull_request]
+
+
+jobs:
+    ci:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - name: Install current Bash on macOS
+              if: runner.os == 'macOS'
+              run: brew install bash
+            - uses: actions/checkout@v6
+            - name: display bash version
+              run: ${GITHUB_WORKSPACE}/bash_version.sh
+        strategy:
+            matrix:
+                include:
+                    - name: linux
+                      os: ubuntu-latest
+                    - name: macos
+                      os: macos-latest
+                    - name: windows
+                      os: windows-latest
