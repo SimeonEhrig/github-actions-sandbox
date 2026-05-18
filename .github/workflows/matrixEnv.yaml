@@ -1,0 +1,19 @@
+name: matrixEnv
+on: [push, pull_request]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                config:
+                    - {compiler : gcc, env : {ALCI_FOO : bar} }
+        env:
+            APCI_OS_NAME: $RUNNER_OS
+            ${{ matrix.config.env }}
+        steps:
+            - name: Hello World
+              run: echo "Hello World"
+
+
+
