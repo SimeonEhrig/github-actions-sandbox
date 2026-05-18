@@ -12,7 +12,7 @@ jobs:
             APCI_OS_NAME: $RUNNER_OS
         steps:
             - name: Hello World
-              run: echo "Hello World"
+              run: echo "Hello World on runner $APCI_OS_NAME"
 
 
 
