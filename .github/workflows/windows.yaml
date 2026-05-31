@@ -1,0 +1,11 @@
+name: windowsJob
+on: [push, pull_request]
+jobs:
+    uninstall-cmake:
+        runs-on: windows-2022
+        steps:
+            - run: cmake --version
+            - run: wmic product where "name like 'CMake%'" call uninstall /nointeractive
+            - run: choco uninstall cmake.install
+            - run: choco install cmake.install --no-progress --version 3.25
+            - run: cmake --version
