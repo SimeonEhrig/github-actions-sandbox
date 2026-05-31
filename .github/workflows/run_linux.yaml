@@ -1,0 +1,8 @@
+name: runLinux
+on: [push, pull_request]
+jobs:
+    print-env:
+        runs-on: ubuntu-22.04
+        container: ubuntu:22.04
+        steps:
+            - run: env
