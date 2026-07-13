@@ -10,7 +10,7 @@ jobs:
         steps:
             - name: set environment variable
               run: |
-                ${{ matrix.config.hwloc == 'no' }} && echo "APCI_HWLOC=OFF" >> $GITHUB_ENV
+                ${{ matrix.config.hwloc == 'no' }} && echo "APCI_HWLOC=OFF" >> $GITHUB_ENV || true
             - name: display bash version
               run: ${GITHUB_WORKSPACE}/display_hwloc.sh
         strategy:
