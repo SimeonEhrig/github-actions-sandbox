@@ -2,7 +2,7 @@
 
 set -eu
 
-if [[ -z ${APCI_HWLOC} ]]; then
+if [[ -z ${APCI_HWLOC+x} ]]; then
     echo "hwloc was not set"
     export APCI_HWLOC=ON
 else
