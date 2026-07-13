@@ -1,0 +1,20 @@
+name: variable-to-env-var
+on: [push, pull_request]
+jobs:
+    ci:
+        name: hwloc ${{ matrix.config.hwloc }}
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - name: set environment variable
+              run: |
+                ${{ matrix.config.hwloc == 'no' }} && echo "APCI_HWLOC=OFF" >> $GITHUB_ENV
+            - name: display bash version
+              run: ${GITHUB_WORKSPACE}/display_hwloc.sh
+        strategy:
+            matrix:
+                config:
+                    - hwloc: on
+                    - hwloc: off
