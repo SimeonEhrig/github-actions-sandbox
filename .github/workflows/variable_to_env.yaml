@@ -20,10 +20,19 @@ jobs:
                 if [ "${{ matrix.config.hwloc}}" == 'yes' ]; then
                   sudo sysctl vm.mmap_rnd_bits=28
                 fi
-            - name: get systctl
-              run: sudo sysctl -n vm.mmap_rnd_bits
+            - name: set environment variable SIMD
+              run: |
+                  ${{ matrix.config.simd }} && echo format('APCI_SIMD={0}', matrix.config.simd) >> $GITHUB_ENV || true
+            - name: display SIMD
+              run: |
+                  if [[ -z ${APCI_SIMD+x} ]]; then
+                    echo "APCI_SIMD was not set"
+                    APCI_SIMD=auto
+                  fi
+                  echo $APCI_SIMD
         strategy:
             matrix:
                 config:
                     - hwloc: yes
+                      simd: EMULATION
                     - hwloc: no
