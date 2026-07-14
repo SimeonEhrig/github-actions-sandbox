@@ -15,6 +15,7 @@ jobs:
             - name: display hwloc
               run: ${GITHUB_WORKSPACE}/display_hwloc.sh
             - name: set sysctl
+              shell: bash
               run: |
                 if [ "${{ matrix.config.hwloc}}" == 'yes' ]; then
                   sudo sysctl vm.mmap_rnd_bits=28
