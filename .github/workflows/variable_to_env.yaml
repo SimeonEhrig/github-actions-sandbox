@@ -22,7 +22,8 @@ jobs:
                 fi
             - name: set environment variable SIMD
               run: |
-                  ${{ matrix.config.simd }} && echo format('APCI_SIMD={0}', matrix.config.simd) >> $GITHUB_ENV || true
+                  echo "command"
+                  ${{ matrix.config.simd != "" }} && echo format('APCI_SIMD={0}', matrix.config.simd) >> $GITHUB_ENV || true
             - name: display SIMD
               run: |
                   if [[ -z ${APCI_SIMD+x} ]]; then
