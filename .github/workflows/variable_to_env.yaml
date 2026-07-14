@@ -1,0 +1,39 @@
+name: variable-to-env-var
+on: [push, pull_request]
+jobs:
+    ci:
+        name: hwloc ${{ matrix.config.hwloc }}
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+        steps:
+            - uses: actions/checkout@v7
+            - name: set environment variable
+              run: |
+                ${{ matrix.config.hwloc == 'no' }} && echo "APCI_HWLOC=OFF" >> $GITHUB_ENV || true
+            - name: display hwloc
+              run: ${GITHUB_WORKSPACE}/display_hwloc.sh
+            - name: set sysctl
+              shell: bash
+              run: |
+                if [ "${{ matrix.config.hwloc}}" == 'yes' ]; then
+                  sudo sysctl vm.mmap_rnd_bits=28
+                fi
+            - name: set environment variable SIMD
+              run: |
+                  echo "command"
+                  ${{ matrix.config.simd != '' }} && echo 'APCI_SIMD=${{matrix.config.simd}}'  >> $GITHUB_ENV || true
+            - name: display SIMD
+              run: |
+                  if [[ -z ${APCI_SIMD+x} ]]; then
+                    echo "APCI_SIMD was not set"
+                    APCI_SIMD=auto
+                  fi
+                  echo $APCI_SIMD
+        strategy:
+            matrix:
+                config:
+                    - hwloc: yes
+                      simd: EMULATION
+                    - hwloc: no
