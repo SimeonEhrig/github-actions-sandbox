@@ -17,10 +17,10 @@ jobs:
             - name: set sysctl
               run: |
                 if [ "${{ matrix.config.hwloc}}" == 'yes' ]; then
-                  sysctl vm.mmap_rnd_bits=28
+                  sudo sysctl vm.mmap_rnd_bits=28
                 fi
             - name: get systctl
-              run: sysctl -n vm.mmap_rnd_bits
+              run: sudo sysctl -n vm.mmap_rnd_bits
         strategy:
             matrix:
                 config:
