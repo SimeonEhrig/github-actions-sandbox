@@ -14,6 +14,13 @@ jobs:
                 ${{ matrix.config.hwloc == 'no' }} && echo "APCI_HWLOC=OFF" >> $GITHUB_ENV || true
             - name: display hwloc
               run: ${GITHUB_WORKSPACE}/display_hwloc.sh
+            - name: set sysctl
+              run: |
+                if [ "${{ matrix.config.hwloc}}" == 'yes' ]; then
+                  sysctl vm.mmap_rnd_bits=28
+                fi
+            - name: get systctl
+              run: sysctl -n vm.mmap_rnd_bits
         strategy:
             matrix:
                 config:
