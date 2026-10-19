@@ -1,0 +1,11 @@
+name: run-on-push-and-pr
+on: [push, pull_request]
+jobs:
+    run-push-pr-echo:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "I'm a pull request or push job."
+            - name: check filter
+              if: (contains(github.event.head_commit.message, 'ci_filter') && !contains(github.event.head_commit.message, matrix.name ))
+              run: echo "filter triggered" && exit 1
+            - run: echo "finish"
